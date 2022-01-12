@@ -33,7 +33,7 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 	    	JMenuBar menu= new JMenuBar();
 	    	
 	    	// Instanciation des "boutons" dans la barre de menu
-	    	JMenu menuCircuit = new JMenu("Circuit");
+	    	JMenu menuCircuit = new JMenu("Facture");
 
 
 	        
