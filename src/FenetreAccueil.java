@@ -1,19 +1,16 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 /**
  * 
- * @author lucas_kaniewski
+ * @author lucas_kaniewski | mickael_campos
  *
  */
 
-public class FenetreAccueil extends JPanel implements ActionListener {
+public class FenetreAccueil extends JFrame implements ActionListener {
 	
-	// JMenuItem Circuit
+	// JMenuItem 
 	private JMenuItem addFacture;
 	private JMenuItem modifFacture;
 	private JMenuItem affichageFacture;
@@ -24,7 +21,7 @@ public class FenetreAccueil extends JPanel implements ActionListener {
 	public FenetreAccueil() {
 			
 			this.setTitle("BINDER");
-	    	this.setLocationRelativeTo(null);
+			this.setLocationRelativeTo(null);
 	    	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    	this.setSize(800, 600);
 	    	this.setResizable(false);
@@ -33,7 +30,7 @@ public class FenetreAccueil extends JPanel implements ActionListener {
 	    	JMenuBar menu= new JMenuBar();
 	    	
 	    	// Instanciation des "boutons" dans la barre de menu
-	    	JMenu menuCircuit = new JMenu("Circuit");
+	    	JMenu menuFacture = new JMenu("Facture");
 
 
 	        
@@ -47,14 +44,14 @@ public class FenetreAccueil extends JPanel implements ActionListener {
 	
 	        
 	        // Ajout d'élément au menu Circuit
-	        menuCircuit.add(affichageFacture);
-	        menuCircuit.add(addFacture);
-	        menuCircuit.add(modifFacture);
-	        menuCircuit.add(searchFacture);
+	        menuFacture.add(affichageFacture);
+	        menuFacture.add(addFacture);
+	        menuFacture.add(modifFacture);
+	        menuFacture.add(searchFacture);
 	        
 	        
 	        // Ajout des "bouton" menu à la barre de menu
-	        menu.add(menuCircuit);
+	        menu.add(menuFacture);
 
 	        
 	        
