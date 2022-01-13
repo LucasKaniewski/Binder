@@ -11,7 +11,7 @@ import javax.swing.JMenuItem;
  *
  */
 
-public class FenetreAccueil extends JFrame implements ActionListener {
+public class FenetreAccueil extends JPanel implements ActionListener {
 	
 	// JMenuItem Circuit
 	private JMenuItem addFacture;
