@@ -56,7 +56,7 @@ public class FenetreConnexion extends JFrame implements ActionListener{
 		Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\campo\\git\\Binder\\logo.png");  
 	    this.setIconImage(icon);
 		
-		//================================ Les panel ===============================
+		//================================ Les panels ===============================
 		
 		this.monPanel = new JPanel();
 		this.monPanel.setBackground(new Color(58, 58, 68));
@@ -71,11 +71,9 @@ public class FenetreConnexion extends JFrame implements ActionListener{
 		this.monPanelGlobal = new JPanel();
 		this.monPanelGlobal.setBackground(new Color(58, 58, 68));
 		
-		
 		//================================ L'affichage =============================
 		
-		//TITRE 
-		
+		//TITRE		
 		this.lblTitre = new JLabel ();
 		this.lblTitre.setForeground(new Color(203,157,62));
 		this.lblTitre.setText("CONNEXION");
@@ -88,7 +86,6 @@ public class FenetreConnexion extends JFrame implements ActionListener{
         
         
 		//INSERTION ID
-		
         this.lblID= new JLabel ();
         this.lblID.setForeground(new Color(203,157,62));
         this.lblID.setText("Identifiant :");
@@ -101,8 +98,7 @@ public class FenetreConnexion extends JFrame implements ActionListener{
         this.monPanel.add(this.jtfID);
     	
 		//INSERTION MDP
-		
-        this.lblMDP = new JLabel ();
+		this.lblMDP = new JLabel ();
         this.lblMDP.setForeground(new Color(203,157,62));
         this.lblMDP.setText("Mot de Passe :");
     	this.lblMDP.setFont(f2);
@@ -115,7 +111,6 @@ public class FenetreConnexion extends JFrame implements ActionListener{
         this.monPanel.add(this.jtfMDP);
   		
   		//BUTTON
-		
         this.btnConnexion = new JButton("Connexion");
         this.monPanelBas.add(this.btnConnexion);
     	

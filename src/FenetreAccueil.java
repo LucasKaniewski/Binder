@@ -48,7 +48,7 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 		this.setTitle("SARL BINDER - Gestion des factures");
 		this.setLocationRelativeTo(null);
 	   	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	   	this.setSize(800, 600);
+	   	this.setSize(1000, 800);
         this.setLocation(500, 150);
 	    this.setResizable(false);
 		// icone windows
