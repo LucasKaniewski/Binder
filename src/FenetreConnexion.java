@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+ 
 
 public class FenetreConnexion extends JFrame implements ActionListener{
 
@@ -42,30 +45,31 @@ public class FenetreConnexion extends JFrame implements ActionListener{
 	
 	//CONSTRUCTEUR
 	public FenetreConnexion() {
-		
-    	//configuration de la fenetre
+		//configuration de la fenetre
     	this.setTitle("SARL BINDER - Connexion");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(500, 400);
         this.setLocation(600, 300);
 		this.setResizable(false);
+		// icone windows
+		Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\campo\\git\\Binder\\logo.png");  
+	    this.setIconImage(icon);
 		
 		//================================ Les panel ===============================
 		
 		this.monPanel = new JPanel();
-		this.monPanel.setBackground(new Color(86, 115, 154));
+		this.monPanel.setBackground(new Color(58, 58, 68));
 		this.monPanel.setLayout(new BorderLayout());
 		this.monPanel.setLayout(new GridLayout(12, 1));
-		this.monPanel.setForeground(Color.red);
 		
 		this.monPanelBas = new JPanel();
 		this.monPanelBas.setLayout(new BorderLayout());
 		this.monPanelBas.setLayout(new GridLayout(1, 2));
-		this.monPanelBas.setBackground(new Color(86, 115, 154));
+		this.monPanelBas.setBackground(new Color(58, 58, 68));
 		
 		this.monPanelGlobal = new JPanel();
-		this.monPanelGlobal.setBackground(new Color(86, 115, 154));
+		this.monPanelGlobal.setBackground(new Color(58, 58, 68));
 		
 		
 		//================================ L'affichage =============================
@@ -73,11 +77,12 @@ public class FenetreConnexion extends JFrame implements ActionListener{
 		//TITRE 
 		
 		this.lblTitre = new JLabel ();
-		this.lblTitre.setForeground(Color.white);
+		this.lblTitre.setForeground(new Color(203,157,62));
 		this.lblTitre.setText("CONNEXION");
 		this.monPanel.add(this.lblTitre, BorderLayout.CENTER);
     	
-    	Font f = new Font("Sherif", Font.BOLD, 18);    
+    	Font f = new Font("Sherif", Font.BOLD, 32);
+    	Font f2 = new Font("Sherif", Font.BOLD, 20);
     	this.lblTitre.setFont(f);
         this.monPanel.add(this.lblTitre);
         
@@ -85,24 +90,28 @@ public class FenetreConnexion extends JFrame implements ActionListener{
 		//INSERTION ID
 		
         this.lblID= new JLabel ();
-        this.lblID.setForeground(Color.white);
+        this.lblID.setForeground(new Color(203,157,62));
         this.lblID.setText("Identifiant :");
+    	this.lblID.setFont(f2);
         this.monPanel.add(this.lblID, BorderLayout.CENTER);
   
         this.jtfID = new JTextField(""); 
         this.jtfID.setPreferredSize(new Dimension(250, 30));
+    	this.jtfID.setFont(f2);
         this.monPanel.add(this.jtfID);
     	
 		//INSERTION MDP
 		
         this.lblMDP = new JLabel ();
-        this.lblMDP.setForeground(Color.white);
+        this.lblMDP.setForeground(new Color(203,157,62));
         this.lblMDP.setText("Mot de Passe :");
+    	this.lblMDP.setFont(f2);
         this.monPanel.add(this.lblMDP, BorderLayout.CENTER);
     	
         this.jtfMDP = new JPasswordField(""); 
         this.jtfMDP.setPreferredSize(new Dimension(250, 30));
         this.jtfMDP.setForeground(Color.black);
+    	this.jtfMDP.setFont(f2);
         this.monPanel.add(this.jtfMDP);
   		
   		//BUTTON
@@ -156,6 +165,4 @@ public class FenetreConnexion extends JFrame implements ActionListener{
 		
 	}
 	
-	
-
 }
