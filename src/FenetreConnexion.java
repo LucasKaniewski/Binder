@@ -116,10 +116,10 @@ public class FenetreConnexion extends JFrame implements ActionListener{
   		
   		//BUTTON
 		
-        this.btnConnexion = new JButton("Connection");
+        this.btnConnexion = new JButton("Connexion");
         this.monPanelBas.add(this.btnConnexion);
     	
-        this.btnQuit = new JButton("Quiter");
+        this.btnQuit = new JButton("Quitter");
         this.monPanelBas.add(this.btnQuit);
     	
 		

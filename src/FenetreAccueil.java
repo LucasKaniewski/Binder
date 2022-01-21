@@ -137,41 +137,66 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 
 	}
 	
-	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		/* ================================== Debut panel Facture ==================================== */		
-
-			/**
-			 * Repaint des panels Facture
-			
-		
-			if(e.getSource().equals(creeFacture)) { 
-				this.getContentPane().removeAll();
-				this.getContentPane().add(new PanelAfficherSpectateur(Modele.affichageSpectateur()).getMonPanel());
-				this.getContentPane().revalidate();
-				this.getContentPane().repaint();
-			}
-			if(e.getSource().equals(ajouterSpectateur)) { 
-				this.getContentPane().removeAll();
-				this.getContentPane().add(new PanelAjouterSpectateur().getMonPanel());
-				this.getContentPane().revalidate();
-				this.getContentPane().repaint();
-			}
-			if(e.getSource().equals(supprimerSpectateur)) { 
-				this.getContentPane().removeAll();
-				this.getContentPane().add(new PanelSupprimerSpectateur().getMonPanel());
-				this.getContentPane().revalidate();
-				this.getContentPane().repaint();
-			}
-			if(e.getSource().equals(rechercherSpectateur)) { 
-				this.getContentPane().removeAll();
-				this.getContentPane().add(new PanelRechercherSpectateur().getMonPanel());
-				this.getContentPane().revalidate();
-				this.getContentPane().repaint();
-			}
-		/* ================================== Fin panel Facture ==================================== */		
-
-			
+		if(e.getSource().equals(creeFacture)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelCreationFacture().getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}
+		if(e.getSource().equals(ajouterTache)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelAjouterTache().getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}
+		if(e.getSource().equals(supprElement)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelSupprimerElement().getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}
+		if(e.getSource().equals(parNum)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelRecherche("parNum").getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}
+		if(e.getSource().equals(parNom)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelRecherche("parNom").getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}
+		if(e.getSource().equals(parDate)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelRecherche("parDate").getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}
+		if(e.getSource().equals(plusRecent)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelAffichage("plusRecent").getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}
+		if(e.getSource().equals(plusAncien)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelAffichage("plusAncien").getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}
+		if(e.getSource().equals(info)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelInformation().getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}
+		if(e.getSource().equals(modifInfo)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelModifInformation().getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}
 	}
 }
