@@ -1,7 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
 
-
 /**
  * 
  * @author lucas_kaniewski | mickael_campos
@@ -177,6 +176,65 @@ public class Modele {
 			rs.close();
 		} catch (SQLException erreur) {
 			System.out.println("Erreur lors de la recupération du nombre d'élément de la facture");
+			erreur.printStackTrace();
+		}
+		Modele.deconnexion();
+		return rep;
+	}
+	
+	/**
+	 * creerFacture(String lieu,String date,String client,String adresse,String ville,String cp)
+	 * la fonction créer une facture dans la bdd
+	 * retourne vrai si l'insertion est éffectué 
+	*/
+	public static boolean creerFacture(String lieu,String date,String client,String adresse,String ville,String cp){
+		Modele.connexionBdd();
+		boolean rep = false;
+		int count;
+		try {
+			
+			pst = connexion.prepareStatement("insert into facture(lieu, date, nomClient, adresse, ville, cp) values(?, ?, ?, ?, ?, ?);");
+			pst.setString(1, lieu);
+			pst.setString(2, date);
+			pst.setString(3, client);
+			pst.setString(4, adresse);
+			pst.setString(5, ville);
+			pst.setString(6, cp);
+			count = pst.executeUpdate();
+			if(count == 1) {
+				rep = true;
+			}
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la création de la facture");
+			erreur.printStackTrace();
+		}
+		Modele.deconnexion();
+		return rep;
+	}
+	
+	/**
+	 * numFacture(String lieu,String date,String client,String adresse,String ville,String cp)
+	 * la fonction retourne l'ID de la facture qui vient d'etre créée 
+	 * elle est utilisé seulement après la création d'une facture
+	*/
+	public static int numFactureCreee(String lieu,String date,String client,String adresse,String ville,String cp){
+		Modele.connexionBdd();
+		int rep = 0;
+		try {
+			pst = connexion.prepareStatement("SELECT id FROM facture WHERE lieu = ? AND date = ? AND nomClient = ? AND adresse = ? AND ville = ? AND  cp = ?");
+			pst.setString(1, lieu);
+			pst.setString(2, date);
+			pst.setString(3, client);
+			pst.setString(4, adresse);
+			pst.setString(5, ville);
+			pst.setString(6, cp);
+	        rs = pst.executeQuery();
+			while(rs.next()) {
+				rep = rs.getInt("id");
+			}
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la recupération de l'ID de la facture");
 			erreur.printStackTrace();
 		}
 		Modele.deconnexion();

@@ -5,6 +5,10 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -97,8 +101,8 @@ public class PanelCreationFacture extends JPanel implements ActionListener{
         pdateCreation.put("text.day", "Day");
         pdateCreation.put("text.month", "Month");
         pdateCreation.put("text.year", "Year");
-        JDatePanelImpl panelDebut = new JDatePanelImpl(modelDebut,pdateCreation);
-        this.dateCreation = new JDatePickerImpl(panelDebut, new DateLabelFormatter());
+        JDatePanelImpl panel = new JDatePanelImpl(modelDebut,pdateCreation);
+        this.dateCreation = new JDatePickerImpl(panel, new DateLabelFormatter());
 		this.dateCreation.setFont(f2);
 		this.monPanel.add(this.dateCreation);
 		
@@ -155,6 +159,7 @@ public class PanelCreationFacture extends JPanel implements ActionListener{
 		this.lblMsgErreur= new JLabel ();
 		this.lblMsgErreur.setText("");
 		this.lblMsgErreur.setForeground(Color.RED);
+		this.lblMsgErreur.setFont(f2);
 		this.monPanel.add(this.lblMsgErreur, BorderLayout.CENTER);
 		    	
 		this.monPanelGlobal.add(this.monPanel);
@@ -166,15 +171,30 @@ public class PanelCreationFacture extends JPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-if ( e.getSource().equals(this.btnValider)) {
-			/*
-			if() {
-        		this.dispose();
+		if (e.getSource().equals(this.btnValider)) {
+			if (!jtfLieu.getText().isEmpty() && !jtfLieu.getText().isEmpty() && !jtfClient.getText().isEmpty() && !jtfAdresse.getText().isEmpty() && !jtfVille.getText().isEmpty() && !jtfCP.getText().isEmpty()) {
+				String lieu = jtfLieu.getText();
+				Date selectedDate = (Date) dateCreation.getModel().getValue();
+	            String date = selectedDate + "";
+	            String client = jtfClient.getText();
+	            String adresse = jtfAdresse.getText();
+	            String ville = jtfVille.getText();
+	            String cp = jtfCP.getText();
+			
+				if(Modele.creerFacture(lieu, date, client, adresse, ville, cp)) {
+					int numFacture = Modele.numFactureCreee(lieu, date, client, adresse, ville, cp);
+					this.lblMsgErreur.setText("La facture " + numFacture + " a bien été créée");
+					this.lblMsgErreur.setForeground(Color.GREEN);
+					this.monPanelBas.remove(btnValider);
+				}
+				else {
+					this.lblMsgErreur.setText("Erreur lors de la création de la facture");
+				}
 			}
 			else {
-				this.lblMsgErreur.setText("");
+				this.lblMsgErreur.setText("Un ou plusieurs champs sont vide");
 			}
-			*/
+			
 		}
 	}
 }
