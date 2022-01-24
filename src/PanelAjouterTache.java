@@ -144,7 +144,6 @@ public class PanelAjouterTache extends JPanel implements ActionListener{
 	            double tarif = Double.parseDouble(stringTarif);
 			
 				if(Modele.ajouterTache(intNumFacture, description, tarif)) {
-					
 					this.lblMsgErreur.setText("La tache a bien été ajouté");
 					this.lblMsgErreur.setForeground(Color.GREEN);
 					this.monPanelBas.remove(btnValider);

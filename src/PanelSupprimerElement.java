@@ -25,6 +25,8 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.SqlDateModel;
 
 public class PanelSupprimerElement extends JPanel implements ActionListener{
+	private int idFacture;
+	
 	// JPanel
 	private JPanel monPanel;
 	private JPanel monPanelBas;
@@ -105,6 +107,7 @@ public class PanelSupprimerElement extends JPanel implements ActionListener{
 		this.lblMsgErreur= new JLabel ();
 		this.lblMsgErreur.setText("");
 		this.lblMsgErreur.setForeground(Color.RED);
+		this.lblMsgErreur.setFont(f2);
 		this.monPanel.add(this.lblMsgErreur, BorderLayout.CENTER);
 		    	
 		this.monPanelGlobal.add(this.monPanel);
@@ -115,6 +118,8 @@ public class PanelSupprimerElement extends JPanel implements ActionListener{
 	 * Panel pour la sélection de élément à supprimer
 	 */
 	public PanelSupprimerElement(int intIdFacture){
+		this.idFacture = intIdFacture;
+		
 		// panels		
 		this.monPanel = new JPanel();
 		this.monPanel.setBackground(new Color(58, 58, 68));
@@ -149,14 +154,14 @@ public class PanelSupprimerElement extends JPanel implements ActionListener{
 		
 		this.lblNumFacture = new JLabel ();
 		this.lblNumFacture.setForeground(new Color(203,157,62));
-		this.lblNumFacture.setText(String.valueOf(intIdFacture));
+		this.lblNumFacture.setText(String.valueOf(this.idFacture));
 		this.lblNumFacture.setFont(f2);
 		this.monPanel.add(this.lblNumFacture, BorderLayout.CENTER);
 
 		//combo Box
-		ArrayList<String> listeElementFactureRecup = Modele.recupListElementFacture(intIdFacture);
+		ArrayList<String> listeElementFactureRecup = Modele.recupListElementFacture(this.idFacture);
 
-		String listeElement[] = new String[Modele.getNbElementFacture(intIdFacture)];
+		String listeElement[] = new String[Modele.getNbElementFacture(this.idFacture)];
 		int i = 0; 
 		for (String unElementFacture : listeElementFactureRecup) {
 			listeElement[i] = unElementFacture;
@@ -176,6 +181,7 @@ public class PanelSupprimerElement extends JPanel implements ActionListener{
 		this.lblMsgErreur = new JLabel ();
 		this.lblMsgErreur.setText("");
 		this.lblMsgErreur.setForeground(Color.RED);
+		this.lblMsgErreur.setFont(f2);
 		this.monPanel.add(this.lblMsgErreur, BorderLayout.CENTER);
 		    	
 		this.monPanelGlobal.add(this.monPanel);
@@ -195,7 +201,15 @@ public class PanelSupprimerElement extends JPanel implements ActionListener{
 			this.monPanelGlobal.revalidate();
 			this.monPanelGlobal.repaint();
 		}else if(e.getSource().equals(this.btnValider2)){
-			
+			String description = this.listeElementFacture.getSelectedItem().toString();
+			if(Modele.supprimerTache(this.idFacture, description)) {
+				this.lblMsgErreur.setText("La tache a bien été supprimé");
+				this.lblMsgErreur.setForeground(Color.GREEN);
+				this.monPanelBas.remove(btnValider2);
+			}
+			else {
+				this.lblMsgErreur.setText("La tache n'a pas été supprimé");
+			}
 		}
 	}
 }

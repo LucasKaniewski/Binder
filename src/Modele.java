@@ -240,6 +240,7 @@ public class Modele {
 		Modele.deconnexion();
 		return rep;
 	}
+	
 	/**
 	 * ajouterTache(int intNumFacture,String description,Double tarif)
 	 * la fonction ajoute la tache dans la bdd elle est lié à la facture 'intNumFacture'
@@ -262,6 +263,31 @@ public class Modele {
 			System.out.println("Erreur lors de la création de la facture");
 			erreur.printStackTrace();
 		}
+		Modele.deconnexion();
+		return rep;
+	}
+	
+	/**
+	 * supprimerTache(int idFacture,String description)
+	 * la fonction supprime la tache dans la bdd qui est lié à la facture 'intNumFacture'
+	*/
+	public static boolean supprimerTache(int idFacture,String description) {
+		Modele.connexionBdd();
+		boolean rep = false;
+		int count = 0;
+		try{
+			pst = connexion.prepareStatement("DELETE FROM element_facture WHERE idFacture = ? AND description = ?");
+			pst.setInt(1, idFacture);
+			pst.setString(2, description);
+			count = pst.executeUpdate();
+			if(count == 1) {
+				rep = true;
+			}
+		}
+		catch(SQLException erreur) {
+			System.out.println("une erreur lors de la supresion de l'objet");
+		}
+		
 		Modele.deconnexion();
 		return rep;
 	}
