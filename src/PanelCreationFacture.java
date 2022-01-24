@@ -5,12 +5,17 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
 
 public class PanelCreationFacture extends JPanel implements ActionListener{
 	// JPanel
@@ -39,7 +44,10 @@ public class PanelCreationFacture extends JPanel implements ActionListener{
 	
 	// JButton
 	private JButton btnValider;
-	
+
+    //calendrier
+    private JDatePickerImpl dateCreation;
+    
 	public PanelCreationFacture(){
 		// panels		
 		this.monPanel = new JPanel();
@@ -60,7 +68,7 @@ public class PanelCreationFacture extends JPanel implements ActionListener{
 		this.lblTitre.setForeground(new Color(203,157,62));
 		this.lblTitre.setText("Création d'une facture");
 		this.monPanel.add(this.lblTitre, BorderLayout.CENTER);
-		  	
+		
 		Font f = new Font("Sherif", Font.BOLD, 32);
 		Font f2 = new Font("Sherif", Font.BOLD, 20);
 		this.lblTitre.setFont(f);
@@ -84,10 +92,15 @@ public class PanelCreationFacture extends JPanel implements ActionListener{
 		this.lblDate.setFont(f2);
 		this.monPanel.add(this.lblDate, BorderLayout.CENTER);
 		
-		this.jtfDate = new JTextField(""); 
-		this.jtfDate.setPreferredSize(new Dimension(250, 30));
-		this.jtfDate.setFont(f2);
-		this.monPanel.add(this.jtfDate);
+		SqlDateModel modelDebut = new SqlDateModel();
+        Properties pdateCreation = new Properties();
+        pdateCreation.put("text.day", "Day");
+        pdateCreation.put("text.month", "Month");
+        pdateCreation.put("text.year", "Year");
+        JDatePanelImpl panelDebut = new JDatePanelImpl(modelDebut,pdateCreation);
+        this.dateCreation = new JDatePickerImpl(panelDebut, new DateLabelFormatter());
+		this.dateCreation.setFont(f2);
+		this.monPanel.add(this.dateCreation);
 		
 		this.lblClient = new JLabel ();
 		this.lblClient.setForeground(new Color(203,157,62));

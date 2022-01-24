@@ -62,13 +62,13 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 	    // Instanciation de la barre de menu
 	    this.menu = new JMenuBar();
 	    	
-	    // Instanciation des "boutons" dans la barre de menu
+	    // Instanciation des différents sections du menu
 	    this.menuCreation = new JMenu("Création / Ajout / Modification");
 	    this.menuRecherche = new JMenu("Rechercher");
 	    this.menuAfficher = new JMenu("Afficher");
 	    this.menuAdmin = new JMenu("Administration");
 	        
-	    // Instanciation d'élément du menu Facture
+	    // Instanciation des éléments du menu
 	    this.creeFacture = new JMenuItem("Créer une facture");
 	    this.ajouterTache = new JMenuItem("Ajouter une tâche");
 	    this.supprElement = new JMenuItem("Supprimer un élément");
@@ -143,56 +143,47 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 			this.getContentPane().add(new PanelCreationFacture().getMonPanel());
 			this.getContentPane().revalidate();
 			this.getContentPane().repaint();
-		}
-		if(e.getSource().equals(ajouterTache)) { 
+		}else if(e.getSource().equals(ajouterTache)) { 
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new PanelAjouterTache().getMonPanel());
 			this.getContentPane().revalidate();
 			this.getContentPane().repaint();
-		}
-		if(e.getSource().equals(supprElement)) { 
+		}else if(e.getSource().equals(supprElement)) { 
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new PanelSupprimerElement().getMonPanel());
 			this.getContentPane().revalidate();
 			this.getContentPane().repaint();
-		}
-		if(e.getSource().equals(parNum)) { 
+		}else if(e.getSource().equals(parNum)) { 
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new PanelRecherche("parNum").getMonPanel());
 			this.getContentPane().revalidate();
 			this.getContentPane().repaint();
-		}
-		if(e.getSource().equals(parNom)) { 
+		}else if(e.getSource().equals(parNom)) { 
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new PanelRecherche("parNom").getMonPanel());
 			this.getContentPane().revalidate();
 			this.getContentPane().repaint();
-		}
-		if(e.getSource().equals(parDate)) { 
+		}else if(e.getSource().equals(parDate)) { 
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new PanelRecherche("parDate").getMonPanel());
 			this.getContentPane().revalidate();
 			this.getContentPane().repaint();
-		}
-		if(e.getSource().equals(plusRecent)) { 
+		}else if(e.getSource().equals(plusRecent)) { 
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new PanelAffichage("plusRecent").getMonPanel());
 			this.getContentPane().revalidate();
 			this.getContentPane().repaint();
-		}
-		if(e.getSource().equals(plusAncien)) { 
+		}else if(e.getSource().equals(plusAncien)) { 
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new PanelAffichage("plusAncien").getMonPanel());
 			this.getContentPane().revalidate();
 			this.getContentPane().repaint();
-		}
-		if(e.getSource().equals(info)) { 
+		}else if(e.getSource().equals(info)) { 
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new PanelInformation().getMonPanel());
 			this.getContentPane().revalidate();
 			this.getContentPane().repaint();
-		}
-		if(e.getSource().equals(modifInfo)) { 
+		}else if(e.getSource().equals(modifInfo)) { 
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new PanelModifInformation().getMonPanel());
 			this.getContentPane().revalidate();
