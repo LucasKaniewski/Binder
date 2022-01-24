@@ -1,11 +1,11 @@
-import java.sql.*;
-import java.util.ArrayList;
-
 /**
  * 
  * @author lucas_kaniewski | mickael_campos
  *
  */
+
+import java.sql.*;
+import java.util.ArrayList;
 
 public class Modele {
 	 
@@ -235,6 +235,31 @@ public class Modele {
 			rs.close();
 		} catch (SQLException erreur) {
 			System.out.println("Erreur lors de la recupération de l'ID de la facture");
+			erreur.printStackTrace();
+		}
+		Modele.deconnexion();
+		return rep;
+	}
+	/**
+	 * ajouterTache(int intNumFacture,String description,Double tarif)
+	 * la fonction ajoute la tache dans la bdd elle est lié à la facture 'intNumFacture'
+	*/
+	public static boolean ajouterTache(int intNumFacture,String description,Double tarif){
+		Modele.connexionBdd();
+		boolean rep = false;
+		int count;
+		try {
+			
+			pst = connexion.prepareStatement("insert into element_facture(idFacture, description, tarif) values(?, ?, ?);");
+			pst.setInt(1, intNumFacture);
+			pst.setString(2, description);
+			pst.setDouble(3, tarif);
+			count = pst.executeUpdate();
+			if(count == 1) {
+				rep = true;
+			}
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la création de la facture");
 			erreur.printStackTrace();
 		}
 		Modele.deconnexion();

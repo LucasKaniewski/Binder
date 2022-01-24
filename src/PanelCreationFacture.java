@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author lucas_kaniewski | mickael_campos
+ *
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,15 +12,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -40,7 +42,6 @@ public class PanelCreationFacture extends JPanel implements ActionListener{
 	
 	// JTF
 	private JTextField jtfLieu;
-	private JTextField jtfDate;
 	private JTextField jtfClient;
 	private JTextField jtfAdresse;
 	private JTextField jtfVille;
@@ -172,7 +173,7 @@ public class PanelCreationFacture extends JPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(this.btnValider)) {
-			if (!jtfLieu.getText().isEmpty() && !jtfLieu.getText().isEmpty() && !jtfClient.getText().isEmpty() && !jtfAdresse.getText().isEmpty() && !jtfVille.getText().isEmpty() && !jtfCP.getText().isEmpty()) {
+			if (!jtfLieu.getText().isEmpty() && !jtfClient.getText().isEmpty() && !jtfAdresse.getText().isEmpty() && !jtfVille.getText().isEmpty() && !jtfCP.getText().isEmpty()) {
 				String lieu = jtfLieu.getText();
 				Date selectedDate = (Date) dateCreation.getModel().getValue();
 	            String date = selectedDate + "";

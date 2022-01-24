@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author lucas_kaniewski | mickael_campos
+ *
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

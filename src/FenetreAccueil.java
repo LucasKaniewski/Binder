@@ -1,15 +1,15 @@
+/**
+ * 
+ * @author lucas_kaniewski | mickael_campos
+ *
+ */
+
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
-/**
- * 
- * @author lucas_kaniewski | mickael_campos
- *
- */
 
 public class FenetreAccueil extends JFrame implements ActionListener {
 	//Panel
