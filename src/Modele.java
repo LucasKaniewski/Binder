@@ -96,7 +96,7 @@ public class Modele {
 		Modele.connexionBdd();
 		ArrayList<Integer> liste = new ArrayList<Integer>();
 		try {
-			rs = st.executeQuery("SELECT id FROM facture") ;
+			rs = st.executeQuery("SELECT id FROM facture ORDER BY id DESC");
 			int id;
 			while(rs.next()) {
 				id = rs.getInt("id");
@@ -269,7 +269,7 @@ public class Modele {
 	
 	/**
 	 * supprimerTache(int idFacture,String description)
-	 * la fonction supprime la tache dans la bdd qui est lié à la facture 'intNumFacture'
+	 * la fonction supprime la tache dans la bdd qui est lié à la facture 'idFacture'
 	*/
 	public static boolean supprimerTache(int idFacture,String description) {
 		Modele.connexionBdd();
@@ -285,7 +285,34 @@ public class Modele {
 			}
 		}
 		catch(SQLException erreur) {
-			System.out.println("une erreur lors de la supresion de l'objet");
+			System.out.println("une erreur lors de la suppresion de la tache");
+		}
+		
+		Modele.deconnexion();
+		return rep;
+	}
+	
+	/**
+	 * supprimerFacture(int idFacture)
+	 * la fonction supprime la facture 'idFacture' dans la bdd ainsi que les tache lié à celle ci dans element_facture
+	*/
+	public static boolean supprimerFacture(int idFacture) {
+		Modele.connexionBdd();
+		boolean rep = false;
+		int count = 0;
+		try{
+			pst = connexion.prepareStatement("DELETE FROM element_facture WHERE idFacture = ?");
+			pst.setInt(1, idFacture);
+			count = pst.executeUpdate();
+			pst = connexion.prepareStatement("DELETE FROM facture WHERE id = ?");
+			pst.setInt(1, idFacture);
+			count = pst.executeUpdate();
+			if(count != 0) {
+				rep = true;
+			}
+		}
+		catch(SQLException erreur) {
+			System.out.println("une erreur lors de la suppresion de la facture");
 		}
 		
 		Modele.deconnexion();

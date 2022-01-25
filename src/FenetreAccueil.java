@@ -5,6 +5,7 @@
  */
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 	private JMenuItem creeFacture;
 	private JMenuItem ajouterTache;
 	private JMenuItem supprElement;
+	private JMenuItem supprFacture;
 
 	private JMenuItem parNum;
 	private JMenuItem parNom;
@@ -55,6 +57,8 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 		Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\campo\\git\\Binder\\logo.png");  
 	    this.setIconImage(icon);
 	    
+		Font f2 = new Font("Sherif", Font.BOLD, 20);
+	    
 	    //Panel
         this.monPanel = new JPanel();
 		this.monPanel.setBackground(new Color(58, 58, 68));
@@ -64,29 +68,46 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 	    	
 	    // Instanciation des différents sections du menu
 	    this.menuCreation = new JMenu("Création / Ajout / Modification");
+		this.menuCreation.setFont(f2);
 	    this.menuRecherche = new JMenu("Rechercher");
+		this.menuRecherche.setFont(f2);
 	    this.menuAfficher = new JMenu("Afficher");
+		this.menuAfficher.setFont(f2);
 	    this.menuAdmin = new JMenu("Administration");
+		this.menuAdmin.setFont(f2);
 	        
 	    // Instanciation des éléments du menu
 	    this.creeFacture = new JMenuItem("Créer une facture");
+		this.creeFacture.setFont(f2);
 	    this.ajouterTache = new JMenuItem("Ajouter une tâche");
+		this.ajouterTache.setFont(f2);
 	    this.supprElement = new JMenuItem("Supprimer un élément");
+		this.supprElement.setFont(f2);
+	    this.supprFacture = new JMenuItem("Supprimer une facture");
+		this.supprFacture.setFont(f2);
 
 	    this.parNum = new JMenuItem("Par N° de facture");
+		this.parNum.setFont(f2);
 	    this.parNom = new JMenuItem("Par nom du client");
+		this.parNom.setFont(f2);
 	    this.parDate = new JMenuItem("Par date");
+		this.parDate.setFont(f2);
 
 	    this.plusRecent = new JMenuItem("Le plus récent");
+		this.plusRecent.setFont(f2);
 	    this.plusAncien = new JMenuItem("Le plus ancien");
+		this.plusAncien.setFont(f2);
 
 	    this.info = new JMenuItem("Informations");
+		this.info.setFont(f2);
 	    this.modifInfo = new JMenuItem("Modifier les informations");
+		this.modifInfo.setFont(f2);
 	               
 	    // Ajout d'élément au menu Facture
 	    this.menuCreation.add(creeFacture);
 	    this.menuCreation.add(ajouterTache);
 	    this.menuCreation.add(supprElement);
+	    this.menuCreation.add(supprFacture);
 
 	    this.menuRecherche.add(parNum);
 	    this.menuRecherche.add(parNom);
@@ -112,6 +133,7 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 	    this.creeFacture.addActionListener(this);
 	    this.ajouterTache.addActionListener(this);
 	    this.supprElement.addActionListener(this);
+	    this.supprFacture.addActionListener(this);
 
 	    this.parNum.addActionListener(this);
 	    this.parNom.addActionListener(this);
@@ -151,6 +173,11 @@ public class FenetreAccueil extends JFrame implements ActionListener {
 		}else if(e.getSource().equals(supprElement)) { 
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new PanelSupprimerElement().getMonPanel());
+			this.getContentPane().revalidate();
+			this.getContentPane().repaint();
+		}else if(e.getSource().equals(supprFacture)) { 
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new PanelSupprimerFacture().getMonPanel());
 			this.getContentPane().revalidate();
 			this.getContentPane().repaint();
 		}else if(e.getSource().equals(parNum)) { 

@@ -36,9 +36,7 @@ public class PanelSupprimerElement extends JPanel implements ActionListener{
 	private JLabel lblTitre;
 	private JLabel lblTitreNumFacture;
 	private JLabel lblNumFacture;
-	
 	private JLabel lblMsgErreur;
-	
 	
 	//JComboBox
     private JComboBox listeIdFacture;
