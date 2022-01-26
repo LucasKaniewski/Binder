@@ -14,9 +14,9 @@ public class Main {
 
 		UIManager.setLookAndFeel(new NimbusLookAndFeel());
 		
-		//FenetreConnexion fenetreConnexion = new FenetreConnexion();
+		FenetreConnexion fenetreConnexion = new FenetreConnexion();
 		
-		FenetreAccueil fenetreAccueil = new FenetreAccueil();
+		//FenetreAccueil fenetreAccueil = new FenetreAccueil();
 		
 	}
 }

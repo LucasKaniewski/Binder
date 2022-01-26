@@ -32,8 +32,8 @@ public class Modele {
 	public static void connexionBdd() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			//connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.212/binder?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "sio", "slam");
-			connexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1/binder?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "root", "");
+			connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.212/binder?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "sio", "slam");
+			//connexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1/binder?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "root", "");
 			st = connexion.createStatement();
 		} catch (ClassNotFoundException e) {
 			System.out.println("Le driver n'as pu être chargé");
