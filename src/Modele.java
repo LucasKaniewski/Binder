@@ -27,13 +27,14 @@ public class Modele {
 	
 	/**
 	 * Methode de connexion à la bdd
+	 * @return
 	*/
 	
 	public static void connexionBdd() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.212/binder?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "sio", "slam");
-			//connexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1/binder?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "root", "");
+			//connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.212/binder?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "sio", "slam");
+			connexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1/binder?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", "root", "");
 			st = connexion.createStatement();
 		} catch (ClassNotFoundException e) {
 			System.out.println("Le driver n'as pu être chargé");
@@ -46,6 +47,7 @@ public class Modele {
 		
 	/**
 	 * Méthode de la déconnexion de la bdd
+	 * @return
 	*/
 			
 	public static void deconnexion() {
@@ -59,7 +61,7 @@ public class Modele {
 	}
 			
 	/**
-	 * 
+	 * Connexion via un login ainsi que d'un mot de passe
 	 * @param unLogin
 	 * @param unMdp
 	 * @return 
@@ -91,6 +93,7 @@ public class Modele {
 	/**
 	 * recupListIdFacture()
 	 * la fonction retourne les ID des facture présente dans la bdd
+	 * @return
 	*/
 	public static ArrayList<Integer> recupListIdFacture() {
 		Modele.connexionBdd();
@@ -114,6 +117,7 @@ public class Modele {
 	/**
 	 * getNbFacture()
 	 * la fonction retourne le nombre de facture présente dans la bdd
+	 * @return
 	*/
 	public static int getNbFacture() {
 		Modele.connexionBdd();
@@ -137,6 +141,7 @@ public class Modele {
 	 * 
 	 * recupListElementFacture(int idFacture)
 	 * la fonction retourne les éléments lié à la facture 'idFacture'
+	 * @return
 	*/
 	public static ArrayList<String> recupListElementFacture(int idFacture) {
 		Modele.connexionBdd();
@@ -162,6 +167,7 @@ public class Modele {
 	/**
 	 * getNbElementFacture(int idFacture)
 	 * la fonction retourne le nombre d'éléments lié à une facture
+	 * @return
 	*/
 	public static int getNbElementFacture(int idFacture) {
 		Modele.connexionBdd();
@@ -185,7 +191,8 @@ public class Modele {
 	/**
 	 * creerFacture(String lieu,String date,String client,String adresse,String ville,String cp)
 	 * la fonction créer une facture dans la bdd
-	 * retourne vrai si l'insertion est éffectué 
+	 * retourne vrai si l'insertion est éffectué
+	 * @return 
 	*/
 	public static boolean creerFacture(String lieu,String date,String client,String adresse,String ville,String cp){
 		Modele.connexionBdd();
@@ -216,6 +223,7 @@ public class Modele {
 	 * numFacture(String lieu,String date,String client,String adresse,String ville,String cp)
 	 * la fonction retourne l'ID de la facture qui vient d'etre créée 
 	 * elle est utilisé seulement après la création d'une facture
+	 * @return
 	*/
 	public static int numFactureCreee(String lieu,String date,String client,String adresse,String ville,String cp){
 		Modele.connexionBdd();
@@ -244,6 +252,7 @@ public class Modele {
 	/**
 	 * ajouterTache(int intNumFacture,String description,Double tarif)
 	 * la fonction ajoute la tache dans la bdd elle est lié à la facture 'intNumFacture'
+	 * @return
 	*/
 	public static boolean ajouterTache(int intNumFacture,String description,Double tarif){
 		Modele.connexionBdd();
@@ -270,6 +279,7 @@ public class Modele {
 	/**
 	 * supprimerTache(int idFacture,String description)
 	 * la fonction supprime la tache dans la bdd qui est lié à la facture 'idFacture'
+	 * @return
 	*/
 	public static boolean supprimerTache(int idFacture,String description) {
 		Modele.connexionBdd();
@@ -287,14 +297,14 @@ public class Modele {
 		catch(SQLException erreur) {
 			System.out.println("une erreur lors de la suppresion de la tache");
 		}
-		
 		Modele.deconnexion();
 		return rep;
 	}
 	
 	/**
 	 * supprimerFacture(int idFacture)
-	 * la fonction supprime la facture 'idFacture' dans la bdd ainsi que les tache lié à celle ci dans element_facture
+	 * la fonction supprime la facture 'idFacture' dans la bdd ainsi que les tache lié à celle ci dans element_facture 
+	 * @return
 	*/
 	public static boolean supprimerFacture(int idFacture) {
 		Modele.connexionBdd();
@@ -314,8 +324,234 @@ public class Modele {
 		catch(SQLException erreur) {
 			System.out.println("une erreur lors de la suppresion de la facture");
 		}
-		
 		Modele.deconnexion();
 		return rep;
 	}
+	
+	/**
+	 * getcpEntreprise()
+	 * La fonction rertourne le cp de l'entreprise
+	 * @return
+	*/
+	public static String getcpEntreprise() {
+		Modele.connexionBdd();
+		String rep = "";
+		try {
+			pst = connexion.prepareStatement("SELECT cp AS info FROM informations");
+	        rs = pst.executeQuery(); 
+			while(rs.next()) {
+				rep = rs.getString("info");
+			}
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la recupération de l'ID de la facture");
+			erreur.printStackTrace();
+		}
+		Modele.deconnexion();
+		return rep;	
+	}
+	
+	/**
+	 * getNomEntreprise()
+	 * La fonction rertourne le nom de l'entreprise
+	 * @return
+	*/
+	public static String getNomEntreprise() {
+		Modele.connexionBdd();
+		String rep = "";
+		try {
+			pst = connexion.prepareStatement("SELECT nom AS info FROM informations");
+	        rs = pst.executeQuery();  
+			while(rs.next()) {
+				rep = rs.getString("info");
+			}
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la recupération de l'ID de la facture");
+			erreur.printStackTrace();
+		}	
+		Modele.deconnexion();
+		return rep;	
+	}
+	
+	/**
+	 * getAdresseEntreprise()
+	 * La fonction rertourne l'adresse de l'entreprise
+	 * @return
+	*/
+	public static String getAdresseEntreprise() {
+		Modele.connexionBdd();
+		String rep = "";
+		try {
+			pst = connexion.prepareStatement("SELECT adresse AS info FROM informations");
+	        rs = pst.executeQuery();  
+			while(rs.next()) {
+				rep = rs.getString("info");
+			}
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la recupération de l'ID de la facture");
+			erreur.printStackTrace();
+		}
+		Modele.deconnexion();
+		return rep;	
+	}
+	
+	/**
+	 * getVilleEntreprise()
+	 * La fonction rertourne la ville de l'entreprise
+	 * @return
+	*/
+	public static String getVilleEntreprise() {
+		Modele.connexionBdd();
+		String rep = "";
+		try {
+			pst = connexion.prepareStatement("SELECT ville AS info FROM informations");
+	        rs = pst.executeQuery();  
+			while(rs.next()) {
+				rep = rs.getString("info");
+			}
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la recupération de l'ID de la facture");
+			erreur.printStackTrace();
+		}
+		
+		Modele.deconnexion();
+		return rep;	
+	}
+	
+	/**
+	 * gettvaEntreprise()
+	 * La fonction rertourne la tva entreprise
+	 * @return
+	*/
+	public static String gettvaEntreprise() {
+		Modele.connexionBdd();
+		String rep = "";
+		try {
+			pst = connexion.prepareStatement("SELECT tvaEntreprise AS info FROM informations");
+	        rs = pst.executeQuery();  
+			while(rs.next()) {
+				rep = rs.getString("info");
+			}
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la recupération de l'ID de la facture");
+			erreur.printStackTrace();
+		}
+		
+		Modele.deconnexion();
+		return rep;	
+	}
+	
+	/**
+	 * gettvaParticulier()
+	 * La fonction rertourne la tva particulier
+	 * @return
+	*/
+	public static String getTvaParticulier() {
+		Modele.connexionBdd();
+		String rep = "";
+		try {
+			pst = connexion.prepareStatement("SELECT tvaParticulier AS info FROM informations");
+	        rs = pst.executeQuery();  
+			while(rs.next()) {
+				rep = rs.getString("info");
+			}
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la recupération de l'ID de la facture");
+			erreur.printStackTrace();
+		}
+		
+		Modele.deconnexion();
+		return rep;	
+	}
+	
+	/**
+	 * gettelephoneEntreprise()
+	 * La fonction rertourne le telehone de l'entreprise
+	 * @return
+	*/
+	public static String getTelephoneEntreprise() {
+		Modele.connexionBdd();
+		String rep = "";
+		try {
+			pst = connexion.prepareStatement("SELECT telephone AS info FROM informations");
+	        rs = pst.executeQuery();  
+			while(rs.next()) {
+				rep = rs.getString("info");
+			}
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la recupération de l'ID de la facture");
+			erreur.printStackTrace();
+		}
+		
+		Modele.deconnexion();
+		return rep;	
+	}
+	
+	/**
+	 * getfaxEntreprise()
+	 * La fonction rertourne le fax de l'entreprise
+	 * @return
+	*/
+	public static String getFaxEntreprise() {
+		Modele.connexionBdd();
+		String rep = "";
+		try {
+			pst = connexion.prepareStatement("SELECT fax AS info FROM informations");
+	        rs = pst.executeQuery();  
+			while(rs.next()) {
+				rep = rs.getString("info");
+			}
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("Erreur lors de la recupération de l'ID de la facture");
+			erreur.printStackTrace();
+		}	
+		Modele.deconnexion();
+		return rep;	
+	}
+	
+	/**
+	 * getmailEntreprise()
+	 * La fonction rertourne le mail de l'entreprise
+	 * @return
+	*/
+	public static String getMailEntreprise() {
+		Modele.connexionBdd();
+		String rep = "";
+		try {
+			pst = connexion.prepareStatement("SELECT mail AS info FROM informations");
+	        rs = pst.executeQuery();  
+			while(rs.next()) {
+				rep = rs.getString("info");
+			}
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("");
+			erreur.printStackTrace();
+		}	
+		Modele.deconnexion();
+		return rep;	
+	}
+	
+	public static boolean modfierUneInformation(String infoModif , String modifVal) {
+		Modele.connexionBdd();
+		boolean rep = false;
+		try {
+			pst = connexion.prepareStatement("UPDATE ? FROM informations WHERE ");
+			pst.setString(1, infoModif);
+	        rs = pst.executeQuery();
+			rs.close();
+		} catch (SQLException erreur) {
+			System.out.println("");
+			erreur.printStackTrace();
+		}	
+		Modele.deconnexion();
+		return rep;	
+	}	
 }
